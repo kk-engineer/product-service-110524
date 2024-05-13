@@ -15,6 +15,7 @@ public class ProductController {
         this.productService = productService;
     }
 
+    // e.g: localhost:8080/products/5
     @GetMapping("/products/{id}")
     public ProductResponseDto getProductDetails(@PathVariable("id") int productId) {
         return productService.getSingleProduct(productId);
