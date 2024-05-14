@@ -52,9 +52,7 @@ public class ProductController {
                 productRequestDto.getDescription(),
                 productRequestDto.getImage(),
                 productRequestDto.getCategory(),
-                productRequestDto.getPrice()
-        );
-
+                productRequestDto.getPrice() );
         // return convertToProductResponseDto(product);
         ProductResponseDto productResponseDto = convertToProductResponseDto(product);
         return new ResponseEntity<>(productResponseDto, HttpStatus.CREATED);
@@ -68,6 +66,33 @@ public class ProductController {
         return new ResponseEntity<>(productResponseDto, HttpStatus.OK);
     }
 
+    @PatchMapping("/products/{id}")
+    public ResponseEntity<ProductResponseDto> updateProduct(@PathVariable("id") Long productId,
+                                                            @RequestBody ProductRequestDto productRequestDto)
+    throws ProductNotFoundException {
+        Product product = productService.updateProduct(productId,
+                productRequestDto.getTitle(),
+                productRequestDto.getDescription(),
+                productRequestDto.getImage(),
+                productRequestDto.getCategory(),
+                productRequestDto.getPrice() );
+        ProductResponseDto productResponseDto = convertToProductResponseDto(product);
+        return new ResponseEntity<>(productResponseDto, HttpStatus.OK);
+    }
+
+    @PutMapping("/products/{id}")
+    public ResponseEntity<ProductResponseDto> replaceProduct(@PathVariable("id") Long productId,
+                                                            @RequestBody ProductRequestDto productRequestDto)
+            throws ProductNotFoundException {
+        Product product = productService.replaceProduct(productId,
+                productRequestDto.getTitle(),
+                productRequestDto.getDescription(),
+                productRequestDto.getImage(),
+                productRequestDto.getCategory(),
+                productRequestDto.getPrice() );
+        ProductResponseDto productResponseDto = convertToProductResponseDto(product);
+        return new ResponseEntity<>(productResponseDto, HttpStatus.OK);
+    }
     private ProductResponseDto convertToProductResponseDto(Product product) {
         String categoryTitle = product.getCategory().getTitle();
         ProductResponseDto productResponseDto = modelMapper.map(product, ProductResponseDto.class);
