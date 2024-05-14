@@ -59,16 +59,16 @@ public class FakeStoreProductService implements ProductService {
             String category,
             double price) {
 
-        FakeStoreDto fakeStoreDto = new FakeStoreDto();
-        fakeStoreDto.setTitle(title);
-        fakeStoreDto.setDescription(description);
-        fakeStoreDto.setImage(imageUrl);
-        fakeStoreDto.setCategory(category);
-        fakeStoreDto.setPrice(price);
+        FakeStoreDto requestDto = new FakeStoreDto();
+        requestDto.setTitle(title);
+        requestDto.setDescription(description);
+        requestDto.setImage(imageUrl);
+        requestDto.setCategory(category);
+        requestDto.setPrice(price);
 
         FakeStoreDto response = restTemplate.postForObject(
                 "http://fakestoreapi.com/products/",
-                fakeStoreDto,
+                requestDto,
                 FakeStoreDto.class
         );
 
