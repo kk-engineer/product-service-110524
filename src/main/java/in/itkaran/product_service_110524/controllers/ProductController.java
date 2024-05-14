@@ -28,7 +28,7 @@ public class ProductController {
 
     // e.g: localhost:8080/products/5
     @GetMapping("/products/{id}")
-    public ProductResponseDto getProductDetails(@PathVariable("id") int productId)
+    public ProductResponseDto getProductDetails(@PathVariable("id") Long productId)
     throws ProductNotFoundException {
         Product product =  productService.getSingleProduct(productId);
         // return modelMapper.map(product, ProductResponseDto.class);
@@ -58,6 +58,14 @@ public class ProductController {
         // return convertToProductResponseDto(product);
         ProductResponseDto productResponseDto = convertToProductResponseDto(product);
         return new ResponseEntity<>(productResponseDto, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/products/{id}")
+    public ResponseEntity<ProductResponseDto> deleteProduct(@PathVariable("id") Long productId)
+    throws ProductNotFoundException {
+        Product product = productService.deleteProduct(productId);
+        ProductResponseDto productResponseDto = convertToProductResponseDto(product);
+        return new ResponseEntity<>(productResponseDto, HttpStatus.OK);
     }
 
     private ProductResponseDto convertToProductResponseDto(Product product) {
