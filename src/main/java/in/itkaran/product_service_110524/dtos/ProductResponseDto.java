@@ -10,6 +10,12 @@ public class ProductResponseDto {
     private String title;
     private String description;
     private double price;
-    private String image;
+    private String imageUrl;
     private String category;
 }
+
+//        "price": 85000,
+//         "title": "iPhone 14",
+//         "imageUrl": "www.imgur.com/14",
+//         "description": "old iPhone",
+//         "category": "new electronics"
