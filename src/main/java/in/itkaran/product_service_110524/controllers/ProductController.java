@@ -27,6 +27,33 @@ public class ProductController {
         this.modelMapper = modelMapper;
     }
 
+    @GetMapping("/")
+    public ResponseEntity<String> welcome() {
+        String str="<h1>";
+        str+="Welcome to the Matrix!";
+        str+="</h1>";
+        str+="<br>";
+        str+="<h2>";
+        str+="This is your last chance.";
+        str+="<br>";
+        str+="After this, there is no turning back.";
+        str+="<br>";
+        str+="You take the blue pill - the story ends,";
+        str+="<br>";
+        str+="You wake up in your bed";
+        str+="<br>";
+        str+="And believe whatever you want to believe.";
+        str+="<br>";
+        str+="You take the red pill - ";
+        str+="<br>";
+        str+="You stay in Wonderland";
+        str+="<br>";
+        str+="And I show you how deep the rabbit hole goes.";
+        str+="<br>";
+        str+="</h2>";
+        return new ResponseEntity<>(str, HttpStatus.OK);
+    }
+
     // e.g: localhost:8080/products/5
     @GetMapping("/products/{id}")
     public ProductResponseDto getProductDetails(@PathVariable("id") Long productId)

@@ -8,6 +8,7 @@ public class ProductService110524Application {
 
     public static void main(String[] args) {
         SpringApplication.run(ProductService110524Application.class, args);
+        System.out.println("Database URL: " + System.getenv("PRODUCT_SERVICE_DB_URL"));
     }
 
 }
