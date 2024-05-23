@@ -1,16 +1,19 @@
 package in.itkaran.product_service_110524;
 
+import in.itkaran.product_service_110524.models.Category;
 import in.itkaran.product_service_110524.models.Product;
 import in.itkaran.product_service_110524.repositories.CategoryRepository;
 import in.itkaran.product_service_110524.repositories.ProductRepository;
 import in.itkaran.product_service_110524.repositories.projections.ProductProjection;
 import in.itkaran.product_service_110524.repositories.projections.ProductWithIdAndTitle;
 import in.itkaran.product_service_110524.services.ProductService;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootTest
 class ProductService110524ApplicationTests {
@@ -82,6 +85,30 @@ class ProductService110524ApplicationTests {
         System.out.println(product2.getId());
     }
 
+    @Test
+    @Transactional
+    void testFetchType() {
+        Optional<Category> category = categoryRepository.findById(3L);
+        if (category.isPresent()) {
+            System.out.println(category.get().getTitle());
+            List<Product> products = category.get().getProducts();
+            for (Product product : products) {
+                System.out.println(product.getTitle());
+            }
+        }
+    }
 
-    // Break till 8:40 AM
+    @Test
+    @Transactional
+    void testFetchMode() {
+        List<Category> categories = categoryRepository.findByTitleEndingWith("electronics");
+        for (Category category : categories) {
+            System.out.println(category.getTitle());
+            List<Product> products = category.getProducts();
+            for (Product product : products) {
+                System.out.println(product.getTitle());
+            }
+        }
+    }
+    // Break till 8:35 AM
 }
