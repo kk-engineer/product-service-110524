@@ -4,6 +4,7 @@ import in.itkaran.product_service_110524.dtos.FakeStoreDto;
 import in.itkaran.product_service_110524.dtos.ProductResponseDto;
 import in.itkaran.product_service_110524.exceptions.ProductNotFoundException;
 import in.itkaran.product_service_110524.models.Product;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -178,6 +179,10 @@ public class FakeStoreProductService implements ProductService {
                     "Product with id " + productId + " not found" );
         }
         return response.toProduct();
+    }
+
+    public Page<Product> getAllProducts(int pageNumber, int pageSize, String sortParam) {
+        return null;
     }
 }
 

@@ -8,6 +8,7 @@ import in.itkaran.product_service_110524.models.Product;
 import in.itkaran.product_service_110524.services.ProductService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,15 +37,27 @@ public class ProductController {
         return convertToProductResponseDto(product);
     }
 
+//    @GetMapping("/products")
+//    public List<ProductResponseDto> getAllProducts() {
+//        List<Product> products = productService.getAllProducts();
+//        List<ProductResponseDto> productResponseDtos = new ArrayList<>();
+//        for (Product product : products) {
+//            productResponseDtos.add(convertToProductResponseDto(product));
+//        }
+//        return productResponseDtos;
+//    }
+
     @GetMapping("/products")
-    public List<ProductResponseDto> getAllProducts() {
-        List<Product> products = productService.getAllProducts();
+    public ResponseEntity<List<ProductResponseDto>> getAllProducts(
+            @RequestParam("pageNumber") int pageNumber,
+            @RequestParam("pageSize") int pageSize,
+            @RequestParam("sortBy") String sortParam) {
+        Page<Product> products = productService.getAllProducts(pageNumber, pageSize, sortParam);
         List<ProductResponseDto> productResponseDtos = new ArrayList<>();
-        for (Product product : products) {
-            productResponseDtos.add(convertToProductResponseDto(product));
-        }
-        return productResponseDtos;
+        products.forEach(product -> productResponseDtos.add(convertToProductResponseDto(product)));
+        return new ResponseEntity<>(productResponseDtos, HttpStatus.OK);
     }
+
 
     @PostMapping("/products")
     public ResponseEntity<ProductResponseDto> createNewProduct(@RequestBody ProductRequestDto productRequestDto) {

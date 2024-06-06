@@ -111,4 +111,26 @@ class ProductService110524ApplicationTests {
         }
     }
     // Break till 8:35 AM
+    @Test
+    void addManyProducts() {
+        double basePrice = 2000;
+        String productName = "toy";
+        String productDescription = "toy number";
+        String imageUrl = "www.imgur.com/";
+        String categoryName = "toys";
+
+        for (int i = 1; i <= 100; i++) {
+            Product product = new Product();
+            product.setTitle(productName + "-" + i);
+            product.setDescription( productDescription + " # " + i);
+            product.setPrice(basePrice + i);
+            Category category = new Category();
+            category.setTitle(categoryName);
+            product.setCategory(category);
+            product.setImageUrl(imageUrl + i);
+            productRepository.save(product);
+        }
+
+
+    }
 }

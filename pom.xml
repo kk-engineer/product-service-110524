@@ -10,7 +10,7 @@
     </parent>
     <groupId>in.itkaran</groupId>
     <artifactId>product_service_110524</artifactId>
-    <version>0.0.1-BATMAN</version>
+    <version>0.0.3-BATMAN</version>
     <name>product_service_110524</name>
     <description>product_service_110524</description>
     <properties>
