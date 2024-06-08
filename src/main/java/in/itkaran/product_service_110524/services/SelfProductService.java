@@ -127,4 +127,8 @@ public class SelfProductService implements ProductService {
     public Product replaceProduct(Long productId, String title, String description, String imageUrl, String category, double price) throws ProductNotFoundException {
         return null;
     }
+
+    public void testMethod() {
+        System.out.println("testMethod");
+    }
 }
